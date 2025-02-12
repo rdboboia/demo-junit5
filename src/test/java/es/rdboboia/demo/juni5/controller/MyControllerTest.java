@@ -1,9 +1,10 @@
 package es.rdboboia.demo.juni5.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.jupiter.api.Test;
@@ -42,7 +43,7 @@ class MyControllerTest {
 		Boolean isSpanish = Boolean.TRUE;
 
 		// Arrange
-		when(this.myService.getHello(isSpanish)).thenReturn(expectedResponse);
+		when(this.myService.getHello(any())).thenReturn(expectedResponse);
 
 		// Act
 		String responseContentAsString = this.mockMvc
@@ -57,6 +58,8 @@ class MyControllerTest {
 
 		// Assert
 		assertEquals(expectedResponse, response.getMessage());
+
+		verify(this.myService).getHello(any());
 	}
 
 	@Test
@@ -70,7 +73,7 @@ class MyControllerTest {
 
 		// Act
 		String responseContentAsString = this.mockMvc
-				.perform(post(MyController.BASE_URL + MyController.ENDPOINT_WITH_PATH_PARAM, isSpanish))
+				.perform(get(MyController.BASE_URL + MyController.ENDPOINT_WITH_PATH_PARAM, isSpanish))
 				.andExpect(status().isOk())
 				.andReturn()
 				.getResponse()
@@ -81,5 +84,7 @@ class MyControllerTest {
 
 		// Assert
 		assertEquals(expectedResponse, response.getMessage());
+
+		verify(this.myService).getGenericHello(isSpanish);
 	}
 }

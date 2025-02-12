@@ -9,6 +9,7 @@ import java.util.List;
 import org.junit.jupiter.api.extension.AfterEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.mockito.Mock;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
 /**
  * Implements {@link AfterEachCallback} to verify that there are no more
@@ -25,7 +26,7 @@ public class VerifyNoMoreInteractionsExtension implements AfterEachCallback {
 
 		// Iterate through all declared fields in the test class.
 		for (Field field : clazz.getDeclaredFields()) {
-			if (field.isAnnotationPresent(Mock.class)) {
+			if (field.isAnnotationPresent(Mock.class) || field.isAnnotationPresent(MockitoBean.class)) {
 				field.setAccessible(true);
 				try {
 					mocks.add(field.get(testInstance));

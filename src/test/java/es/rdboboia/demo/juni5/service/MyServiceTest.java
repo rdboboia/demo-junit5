@@ -2,7 +2,6 @@ package es.rdboboia.demo.juni5.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.stream.Stream;
@@ -71,8 +70,7 @@ class MyServiceTest {
 
 		// Arrange
 		String expectedMessage = "Hello";
-		String languageEn = "en";
-		when(this.messageGenericRepository.getMessage(languageEn)).thenReturn(expectedMessage);
+		when(this.messageGenericRepository.getMessage(languageCaptor.capture())).thenReturn(expectedMessage);
 
 		// Act
 		String hello = this.myServiceImpl.getGenericHello(Boolean.FALSE);
@@ -81,8 +79,9 @@ class MyServiceTest {
 		assertEquals(expectedMessage, hello);
 
 		// Verify already done with extension.
-		String message = verify(this.messageGenericRepository).getMessage(languageCaptor.capture());
-		System.out.println(message);
+
+		// Check captor value
+		System.out.println(languageCaptor.getValue());
 	}
 
 	@Test

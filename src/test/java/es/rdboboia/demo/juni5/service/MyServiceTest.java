@@ -77,11 +77,9 @@ class MyServiceTest {
 
 		// Assert
 		assertEquals(expectedMessage, hello);
+		assertEquals("en", languageCaptor.getValue());
 
 		// Verify already done with extension.
-
-		// Check captor value
-		System.out.println(languageCaptor.getValue());
 	}
 
 	@Test

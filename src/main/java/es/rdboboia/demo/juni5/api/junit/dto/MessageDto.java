@@ -1,4 +1,4 @@
-package es.rdboboia.demo.juni5.controller.junit.dto;
+package es.rdboboia.demo.juni5.api.junit.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

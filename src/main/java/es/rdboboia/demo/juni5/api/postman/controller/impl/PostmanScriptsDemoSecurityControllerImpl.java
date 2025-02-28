@@ -1,4 +1,4 @@
-package es.rdboboia.demo.juni5.controller.postman.impl;
+package es.rdboboia.demo.juni5.api.postman.controller.impl;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
@@ -6,8 +6,8 @@ import java.util.UUID;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import es.rdboboia.demo.juni5.controller.postman.PostmanScriptsDemoSecurityController;
-import es.rdboboia.demo.juni5.controller.postman.dto.TokenDto;
+import es.rdboboia.demo.juni5.api.postman.controller.PostmanScriptsDemoSecurityController;
+import es.rdboboia.demo.juni5.api.postman.dto.TokenDto;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor

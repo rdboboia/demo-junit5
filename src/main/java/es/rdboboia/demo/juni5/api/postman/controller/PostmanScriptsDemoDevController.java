@@ -1,4 +1,4 @@
-package es.rdboboia.demo.juni5.controller.postman;
+package es.rdboboia.demo.juni5.api.postman.controller;
 
 import java.util.List;
 
@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import es.rdboboia.demo.juni5.controller.postman.dto.MyObjectDto;
+import es.rdboboia.demo.juni5.api.postman.dto.MyObjectDto;
 
-@RequestMapping(PostmanScriptsDemoController.BASE_URL)
-public interface PostmanScriptsDemoController {
+@RequestMapping(PostmanScriptsDemoDevController.BASE_URL)
+public interface PostmanScriptsDemoDevController {
 
-	public static final String BASE_URL = "/postman-scripts-demo";
+	public static final String BASE_URL = "my-object-ms-dev/postman-scripts-demo";
 
 	public static final String ENDPOINT = "/my-object";
 	public static final String ENDPOINT_WITH_PATH_PARAM = ENDPOINT + "/{id}";

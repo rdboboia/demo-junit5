@@ -18,7 +18,7 @@ public class PostmanScriptsDemoSecurityControllerImpl implements PostmanScriptsD
 	public TokenDto getToken() {
 		return TokenDto.builder()
 				.accessToken(UUID.randomUUID().toString())
-				.expiresIn(LocalDateTime.now().toEpochSecond(ZoneOffset.UTC))
+				.expiresIn(LocalDateTime.now().toEpochSecond(ZoneOffset.UTC) + 60)
 				.build();
 	}
 

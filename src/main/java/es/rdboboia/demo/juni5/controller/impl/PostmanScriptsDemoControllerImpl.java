@@ -29,7 +29,12 @@ public class PostmanScriptsDemoControllerImpl implements PostmanScriptsDemoContr
 
 	@Override
 	public MyObjectDto createObject(MyObjectDto myObjectDto) {
-		Long id = (long) this.myObjectDtoList.size();
-		return this.myObjectDtoList.put(id, myObjectDto);
+		// Save the object in memory.
+		Long id = (long) this.myObjectDtoList.size() + 1;
+		myObjectDto.setId(id);
+		this.myObjectDtoList.put(id, myObjectDto);
+
+		// Return the object.
+		return this.myObjectDtoList.get(id);
 	}
 }

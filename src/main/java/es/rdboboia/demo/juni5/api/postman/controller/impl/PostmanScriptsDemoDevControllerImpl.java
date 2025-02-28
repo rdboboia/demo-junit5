@@ -12,7 +12,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @RestController
-public class PostmanScriptsDemoControllerDevImpl implements PostmanScriptsDemoDevController {
+public class PostmanScriptsDemoDevControllerImpl implements PostmanScriptsDemoDevController {
 
 	// "Repository" in memory.
 	private final Map<Long, MyObjectDto> myObjectDtoList = new HashMap<>();

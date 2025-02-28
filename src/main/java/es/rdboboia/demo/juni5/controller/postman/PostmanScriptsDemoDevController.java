@@ -1,4 +1,4 @@
-package es.rdboboia.demo.juni5.controller;
+package es.rdboboia.demo.juni5.controller.postman;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import es.rdboboia.demo.juni5.dto.MyObjectDto;
+import es.rdboboia.demo.juni5.controller.postman.dto.MyObjectDto;
 
 @RequestMapping(PostmanScriptsDemoDevController.BASE_URL)
 public interface PostmanScriptsDemoDevController {

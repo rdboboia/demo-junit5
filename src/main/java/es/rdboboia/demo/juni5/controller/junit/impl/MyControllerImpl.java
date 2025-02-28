@@ -1,9 +1,9 @@
-package es.rdboboia.demo.juni5.controller.impl;
+package es.rdboboia.demo.juni5.controller.junit.impl;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import es.rdboboia.demo.juni5.controller.MyController;
-import es.rdboboia.demo.juni5.dto.MessageDto;
+import es.rdboboia.demo.juni5.controller.junit.MyController;
+import es.rdboboia.demo.juni5.controller.junit.dto.MessageDto;
 import es.rdboboia.demo.juni5.service.MyService;
 import lombok.RequiredArgsConstructor;
 

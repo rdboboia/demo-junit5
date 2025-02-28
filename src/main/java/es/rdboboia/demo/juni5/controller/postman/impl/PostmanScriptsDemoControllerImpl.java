@@ -1,4 +1,4 @@
-package es.rdboboia.demo.juni5.controller.impl;
+package es.rdboboia.demo.juni5.controller.postman.impl;
 
 import java.util.HashMap;
 import java.util.List;
@@ -6,8 +6,8 @@ import java.util.Map;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import es.rdboboia.demo.juni5.controller.PostmanScriptsDemoController;
-import es.rdboboia.demo.juni5.dto.MyObjectDto;
+import es.rdboboia.demo.juni5.controller.postman.PostmanScriptsDemoController;
+import es.rdboboia.demo.juni5.controller.postman.dto.MyObjectDto;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor

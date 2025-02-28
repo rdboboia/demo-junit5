@@ -1,4 +1,4 @@
-package es.rdboboia.demo.juni5.dto;
+package es.rdboboia.demo.juni5.controller.postman.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class MessageDto {
-	private String message;
+public class MyObjectDto {
+	private Long id;
+	private String description;
 }

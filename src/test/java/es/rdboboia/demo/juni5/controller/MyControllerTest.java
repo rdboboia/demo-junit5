@@ -19,7 +19,8 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
-import es.rdboboia.demo.juni5.dto.MessageDto;
+import es.rdboboia.demo.juni5.controller.junit.MyController;
+import es.rdboboia.demo.juni5.controller.junit.dto.MessageDto;
 import es.rdboboia.demo.juni5.extensions.VerifyNoMoreInteractionsExtension;
 import es.rdboboia.demo.juni5.service.MyService;
 

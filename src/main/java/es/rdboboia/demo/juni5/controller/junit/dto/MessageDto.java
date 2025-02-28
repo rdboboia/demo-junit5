@@ -1,4 +1,4 @@
-package es.rdboboia.demo.juni5.dto;
+package es.rdboboia.demo.juni5.controller.junit.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class TokenDto {
-	private String accessToken;
-	private Long expiresIn;
+public class MessageDto {
+	private String message;
 }

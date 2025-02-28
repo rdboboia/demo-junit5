@@ -1,5 +1,6 @@
 package es.rdboboia.demo.juni5.service;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
@@ -88,7 +89,7 @@ class MyServiceTest {
 		doNothing().when(this.messageGenericRepository).doSomething();
 
 		// Act
-		this.myServiceImpl.doSomething();
+		assertDoesNotThrow(() -> this.myServiceImpl.doSomething());
 
 		// Assert
 		// Verify already done with extension.

@@ -1,0 +1,150 @@
+// Use module.exports to export the functions that should be
+// available to use from this package.
+// module.exports = { <your_function> }
+
+// Once exported, use this statement in your scripts to use the package.
+// const myPackage = pm.require('<package_name>')
+
+module.exports = { manageToken };
+
+/**
+ * Function that "automagically" manages the required token for API calls.
+ */
+function manageToken(serviceName) {
+    setCurrentDateTime();
+    setService(serviceName);
+    setServiceVariables();
+    refreshToken();
+}
+
+/**
+ * Set the current date and time in an environment variable.
+ */
+function setCurrentDateTime() {
+    var date = new Date();
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+    var hour = date.getHours();
+    var minute = date.getMinutes();
+    var second = date.getSeconds();
+
+    var dateString = day.toString().padStart(2, "0");
+    dateString += "-" + month.toString().padStart(2, "0");
+    dateString += "-" + year.toString();
+    dateString += " " + hour.toString().padStart(2, "0");
+    dateString += ":" + minute.toString().padStart(2, "0");
+    dateString += ":" + second.toString().padStart(2, "0");
+
+    pm.environment.set("currentDateTime", dateString);
+    console.log(dateString);
+}
+
+/**
+ * Set service to be called.
+ * 
+ * @param string serviceName - the service name.
+ */
+function setService(serviceName) {
+    pm.environment.set("lastCalledServiceName", pm.environment.get("serviceName"));
+    pm.environment.set("serviceName", serviceName);
+}
+
+/** 
+ * Set variables for selected service.
+ */
+function setServiceVariables() {
+    pm.environment.set("pathPrefix", pm.environment.get("pathPrefix-" + pm.environment.get("serviceName")));
+    pm.environment.set("suscriptionKey", pm.environment.get("suscriptionKey-" + pm.environment.get("serviceName")));
+    // pm.environment.set("clientId", pm.environment.get("clientId-" + pm.environment.get("serviceName")));
+    // pm.environment.set("clientSecret", pm.environment.get("clientSecret-" + pm.environment.get("serviceName")));
+}
+
+/**
+ * Function that refreshes the token and stores it as a collection variable.
+ */
+function refreshToken() {
+    // Check if token refresh is required.
+    if (!isTokenRefreshRequired()) {
+        return;
+    }
+
+    console.log("Token refresh required.");
+
+    // Set token host url (different from host for local; same as host for DEV+).
+    var urlTokenHost;
+    if (pm.environment.get("host") == "localhost") {
+        // urlTokenHost = pm.environment.get("localTokenHost");
+        urlTokenHost = "localhost:8080";
+    } else {
+        urlTokenHost = pm.environment.get("host");
+    }
+
+    // Send request to retrieve token
+    pm.sendRequest({
+        url: "http://" + urlTokenHost + pm.collectionVariables.get("tokenPath"),
+        method: 'GET',
+        header: {
+            'Subscription-Key': pm.environment.get("suscriptionKey"),
+        },
+        body: {
+            mode: "urlencoded",
+            urlencoded: [
+                { key: "grant_type", value: "client_credentials" }
+                //{ key: "client_id", value: pm.environment.get("clientId") },
+                //{ key: "client_secret", value: pm.environment.get("clientSecret") },
+                //{ key: "scope", value: pm.environment.get("clientId") + "/.default" }
+            ]
+        }
+    }, function (err, response) {
+        // Store token.
+        pm.environment.set("authToken", response.json().accessToken);
+
+        // Store token expiration timestamp.
+        var currentTime = new Date().getTime() / 1000;
+        pm.environment.set("tokenExpirationTime", currentTime + response.json().expiresIn - 3);
+    });
+}
+
+/**
+ * Checks if the token has to be refreshed.
+ * 
+ * @return boolean - true if a token refresh is required; false otherwise.
+ */
+function isTokenRefreshRequired() {
+    return isDifferentService() || isTokenExpired();
+}
+
+/**
+ * Checks if a different service is to be called.
+ * 
+ * @return boolean - true if the service to be called is different; false otherwise.
+ */
+function isDifferentService() {
+    if (pm.environment.get("serviceName") != pm.environment.get("lastCalledServiceName")) {
+        console.log("Different service to be called.");
+        return true;
+    }
+
+    return false;
+}
+
+/**
+ * Check if the current token has expired.
+ * 
+ * @return boolean - true if the expiration date is undefined or if the token has expired; false otherwise.
+ */
+function isTokenExpired() {
+    var currentTime = new Date().getTime() / 1000;
+    if (pm.environment.get("tokenExpirationTime") === undefined) {
+        console.log("Token expiration date is undefined.");
+        return true;
+    }
+
+    if (currentTime > pm.environment.get("tokenExpirationTime")) {
+        console.log("Toekn expired.");
+        return true;
+    }
+
+    return false;
+}

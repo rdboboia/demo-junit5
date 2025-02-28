@@ -1,0 +1,280 @@
+{
+	"info": {
+		"_postman_id": "183969e9-e75d-48e0-8d7a-15817279133a",
+		"name": "Postman Scripts Demo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34221237"
+	},
+	"item": [
+		{
+			"name": "MyObjectService",
+			"item": [
+				{
+					"name": "MyObject",
+					"item": [
+						{
+							"name": "Find ALL",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"const postmanScripts = pm.require('postman-scripts');\r",
+											"\r",
+											"var serviceName = new String(pm.execution.location[1]).toLowerCase();\r",
+											"postmanScripts.manageToken(serviceName);"
+										],
+										"type": "text/javascript",
+										"packages": {
+											"postman-scripts": {
+												"id": "01954d82-77b6-79bd-9180-f59d8979629e"
+											}
+										}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{host}}:{{port}}{{pathPrefix}}/postman-scripts-demo/my-object",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}{{pathPrefix}}",
+									"path": [
+										"postman-scripts-demo",
+										"my-object"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Save",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"if (pm.response.code == 201) {\r",
+											"    pm.environment.set(\"myObjectId\", pm.response.json().id)\r",
+											"}"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"const postmanScripts = pm.require('postman-scripts');\r",
+											"\r",
+											"var serviceName = new String(pm.execution.location[1]).toLowerCase();\r",
+											"postmanScripts.manageToken(serviceName);"
+										],
+										"type": "text/javascript",
+										"packages": {
+											"postman-scripts": {
+												"id": "01954d82-77b6-79bd-9180-f59d8979629e"
+											}
+										}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"description\": \"{{$randomBsBuzz}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{host}}:{{port}}{{pathPrefix}}/postman-scripts-demo/my-object",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}{{pathPrefix}}",
+									"path": [
+										"postman-scripts-demo",
+										"my-object"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Find by ID",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"const postmanScripts = pm.require('postman-scripts');\r",
+											"\r",
+											"var serviceName = new String(pm.execution.location[1]).toLowerCase();\r",
+											"postmanScripts.manageToken(serviceName);"
+										],
+										"type": "text/javascript",
+										"packages": {
+											"postman-scripts": {
+												"id": "01954d82-77b6-79bd-9180-f59d8979629e"
+											}
+										}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{host}}:{{port}}{{pathPrefix}}/postman-scripts-demo/my-object/{{myObjectId}}",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}{{pathPrefix}}",
+									"path": [
+										"postman-scripts-demo",
+										"my-object",
+										"{{myObjectId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "OtherService",
+			"item": [
+				{
+					"name": "Other",
+					"item": [
+						{
+							"name": "Find ALL",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"const postmanScripts = pm.require('postman-scripts');\r",
+											"\r",
+											"var serviceName = new String(pm.execution.location[1]).toLowerCase();\r",
+											"postmanScripts.manageToken(serviceName);"
+										],
+										"type": "text/javascript",
+										"packages": {
+											"postman-scripts": {
+												"id": "01954d82-77b6-79bd-9180-f59d8979629e"
+											}
+										}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{host}}:{{port}}{{pathPrefix}}/postman-scripts-demo/other",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}{{pathPrefix}}",
+									"path": [
+										"postman-scripts-demo",
+										"other"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Token API",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{protocol}}://{{host}}:{{port}}{{pathPrefix}}/postman-scripts-demo/security/get-token",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}{{pathPrefix}}",
+					"path": [
+						"postman-scripts-demo",
+						"security",
+						"get-token"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "tokenPath",
+			"value": "/postman-scripts-demo/security/get-token",
+			"type": "string"
+		}
+	]
+}
